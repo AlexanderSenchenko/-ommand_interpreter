@@ -42,7 +42,7 @@ int main()
 	char* token;
 	char** arg_list;
 
-	int count_arg = 7; // 0 - command, 6 - NULL
+	int count_arg = 7; // 0 - command, 6 - NULL 
 	int size_arg;
 
 	int i = 0;
@@ -78,14 +78,14 @@ int main()
 
 		arg_list[i] = NULL;
 
-		#if 1
 		pid = fork();
 		if (pid == 0) {
-			exit(0);
+			execvp(arg_list[0], arg_list);
+			perror("Error exec");
+			exit(EXIT_FAILURE);
 		} else {
 			wait(&status);
 		}
-		#endif
 
 		arg_list[i] = NULL;
 
